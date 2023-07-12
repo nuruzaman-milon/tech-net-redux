@@ -24,12 +24,11 @@ export const cartSlice = createSlice({
             );
             if (existingProduct && existingProduct.quantity! < 5) {
                 existingProduct.quantity = existingProduct.quantity! + 1;
+                state.total = state.total + action.payload.price;
             } else if (!existingProduct) {
                 state.products.push({ ...action.payload, quantity: 1 })
+                state.total = state.total + action.payload.price;
             }
-
-            // else if(existingProduct.quantity < 6) {
-            // }
         },
 
         reduceFromCart: (state, action: PayloadAction<IProduct>) => {
@@ -38,6 +37,7 @@ export const cartSlice = createSlice({
             );
             if (existingProduct && existingProduct.quantity! > 1) {
                 existingProduct.quantity = existingProduct.quantity! - 1;
+                state.total = state.total - action.payload.price;
             }
         },
 
@@ -45,6 +45,7 @@ export const cartSlice = createSlice({
             state.products = state.products.filter(
                 (product: IProduct) => product._id !== action.payload._id
             )
+            state.total = state.total - action.payload.price * action.payload.quantity!;
         }
     }
 })

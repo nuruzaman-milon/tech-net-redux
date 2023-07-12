@@ -19,10 +19,7 @@ import { addToCart, reduceFromCart, removeFromCart } from '@/redux/features/cart
 export default function Cart() {
 
   const dispatch = useAppDispatch()
-  const { products } = useAppSelector((state) => state.cart);
-  const total = 0;
-
-  //! **
+  const { products, total } = useAppSelector((state) => state.cart);
 
   return (
     <Sheet>
@@ -54,14 +51,14 @@ export default function Cart() {
                 </p>
               </div>
               <div className="border-l pl-5 flex flex-col justify-between">
-                <Button onClick={()=>dispatch(addToCart(product))}>
+                <Button onClick={() => dispatch(addToCart(product))}>
                   <HiOutlinePlus size="20" />
                 </Button>
-                <Button onClick={()=>dispatch(reduceFromCart(product))}>
+                <Button onClick={() => dispatch(reduceFromCart(product))}>
                   <HiMinus size="20" />
                 </Button>
                 <Button
-                  onClick={()=>dispatch(removeFromCart(product))}
+                  onClick={() => dispatch(removeFromCart(product))}
                   variant="destructive"
                   className="bg-red-500 hover:bg-red-400"
                 >
